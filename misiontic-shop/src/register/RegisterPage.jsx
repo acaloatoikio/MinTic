@@ -2,6 +2,7 @@ import React, {  useState, useEffect ,Fragment } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Redirect } from "react-router";
 import ForbidenComponent from "../shared/components/forbiden/ForbidenComponent";
+import apiBaseUrl from "../shared/components/utils/Api";
 
 
 
@@ -49,9 +50,45 @@ const listItems = numbers.map((product) =>
     }, []);
     */
    
-function RegisterPage() {
+const RegisterPage = ()=> {
+
+  const [productName, setProductName] = useState("");
+  const [price, setPrice] = useState(0);
+  const [stock, setStock] = useState(0);
+  const [description, setDescription] = useState("");
+  const [status, setStatus] = useState("");
+
+  const addProduct = async () => {
+    const productData = {
+      name: productName,
+      price: price,
+      stock: stock,
+      description: description,
+      status: status
+
+    }
+    const response = await fetch(`${apiBaseUrl}/add-product`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(productData)
+      
+
+    });
+    const jsonResponse = await response.json();
+    console.log(jsonResponse);
+    const handleReset = () => {
+      Array.from(document.querySelectorAll("input")).forEach(
+        input => (input.value = "")
+      );
+    }
+    handleReset()
+
+  }
+
   const { user, isAuthenticated } = useAuth0();
-  if (localStorage.getItem("state") === "Administrador" && isAuthenticated) {
+  if (localStorage.getItem("state") === "Vendedor" && isAuthenticated) {
     return (
       <Fragment>
         <div className="container">
@@ -68,31 +105,42 @@ function RegisterPage() {
               <form action="" enctype="multipart/form-data">
                 <div className="row row-col-12 col-6 form -group p-5">
                   <div className="col-12 col- 6 sm">
-                    <label className="d-block my-2 text-light" for="">Identificador Único</label>
-                    <input required className="form-control" type="text" placeholder="Id" />
-                  </div>
-
-                  <div className="col-12">
-                    <label className="d-block my-2 text-light" for="">Descripción del producto</label>
-                    <input required className="form-control" type="text" placeholder="Descripción del producto" />
+                    <label className="d-block my-2 text-light" for="">Nombre de Producto</label>
+                    <input required className="form-control" type="text" placeholder="Nombre del Producto" onChange= {(e)=>setProductName(e.target.value)}/>
                   </div>
 
                   <div className="col-12">
                     <label className="d-block my-2 text-light" for="">Valor Unitario</label>
-                    <input required className="form-control" type="number" placeholder="Valor Unitario" />
+                    <input required className="form-control" type="number" placeholder="Valor Unitario" onChange= {(e)=>setPrice(e.target.value)} />
                   </div>
 
                   <div className="col-12">
+                    <label className="d-block my-2 text-light" for="">Existencia</label>
+                    <input required className="form-control" type="number" placeholder="Existencia" onChange={(e) => setStock(e.target.value)}/>
+                  </div>
+
+                  <div className="col-12">
+                    <label className="d-block my-2 text-light" for="">Descripción del Producto</label>
+                    <input required className="form-control" type="text" placeholder="Descripción del Producto" onChange={(e) => setDescription(e.target.value)} />
+                  </div>
+
+
+                  <div className="col-12">
+                    <label className="d-block my-2 text-light" for="">Estado del Producto</label>
+                    <input required className="form-control" type="text" placeholder="Estado del Producto" onChange={(e) => setStatus(e.target.value)} />
+                  </div>
+
+                  {/* <div className="col-12">
                     <label className="d-block my-2 text-light" for="">Estado del producto</label>
-                    <select required name="Estado producto" id="" className="form-control">
+                    <select required name="Estado producto" id="" className="form-control" onChange={(e) => setStatus(e.target.value)}>
                       <option value="" selected>Seleccione</option>
                       <option value="1">Disponible</option>
                       <option value="2">No disponible</option>
                     </select>
-                  </div>
+                  </div> */}
 
                   <div className="d-flex justify-content-center">
-                    <input type="submit" className="btn btn-light mt-5 col-4" onclick="return validacion(this.form)" value="Registrar" />
+                    <input type="button" onClick={addProduct} className="btn btn-light mt-5 col-4"  value="Registrar" />
                   </div>
                 </div>
               </form>
