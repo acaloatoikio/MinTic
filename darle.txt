@@ -1,0 +1,23 @@
+
+https://www.freesqldatabase.com/freemysqldatabase/
+https://phpmyadmin.co/
+servidor sql10.freesqldatabase.com
+usuario sql10445681
+uK4sveNtaD
+
+
+
+app.listen(app.get('port'), async () => {
+    connection = await mysql.createConnection({
+        host: 'sql10.freesqldatabase.com',
+        user: 'sql10445681',
+        password: 'uK4sveNtaD',
+        database: 'sql10445681',
+        port: 3306,
+        Promise: bluebird
+    });
+    console.log("Server running on port: " + app.get("port"));
+
+
+https://misionticfrontend.herokuapp.com/
+
