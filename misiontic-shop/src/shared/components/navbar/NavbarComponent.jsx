@@ -78,6 +78,9 @@ function NavbarComponent(props) {
               <Link to="/sales" className="nav-link active" aria-current="page">Sales</Link>
             </li>
             <li className="nav-item">
+              <Link to="/statuss" className="nav-link active" aria-current="page">Status Sales</Link>
+            </li>
+            <li className="nav-item">
               <Link to="/register" className="nav-link active" aria-current="page">Register</Link>
             </li>
             <a>

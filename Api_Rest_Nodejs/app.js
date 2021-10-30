@@ -155,6 +155,19 @@ app.get("/get-products", async (request, response) => {
     response.json({ data: rows });
 })
 
+//Se añade los Pull de Danna
+
+app.put("/update-estadoVenta", async (req, res) => {
+
+    const user = req.body;
+    const id = user.id;
+    const estadoVenta = user.estadoVenta;
+    await connection.execute(`UPDATE ventaTotal SET estadoVenta='${estadoVenta}' WHERE id='${id}'`);
+
+    res.json({ status: "ok" });
+
+})
+
 
 //Se añaden los Get de Jan
     

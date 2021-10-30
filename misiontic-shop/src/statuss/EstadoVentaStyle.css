@@ -1,0 +1,17 @@
+.centrado{text-align:center; padding:8px;}
+  center{margin:16px 0;}
+
+.buscarVenta {
+  display: inline-flex; 
+  margin-top: 20px;
+  margin-bottom: 0px;
+  
+}
+
+select{
+  margin-right: 10px;
+}
+
+h5{
+  margin-right: 10px;
+}

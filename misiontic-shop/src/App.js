@@ -5,6 +5,7 @@ import RegisterPage from "./register/RegisterPage";
 import SalesPages from "./sales/SalesPages";
 import UsersPages from "./users/UsersPages";
 import HomePages from "./home/HomePages";
+import sSales from "./statuss/sSales";
 import{BrowserRouter as Router, Switch, Route} from "react-router-dom"
 import NavbarComponent from "./shared/components/navbar/NavbarComponent";
 import ForbidenComponent from "./shared/components/forbiden/ForbidenComponent";
@@ -32,6 +33,9 @@ function App() {
         </Route>
         <Route path="/users" exact>
           <UsersPages />
+        </Route>
+        <Route path="/statuss" exact>
+          <sSales />
         </Route>
         <Route path="/forbiden" exact>
           <ForbidenComponent/>
